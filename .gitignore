@@ -1,0 +1,7 @@
+/temp/
+.idea/
+.vs/
+cmake-build-debug/
+out/
+*.log
+[bB]uild*
