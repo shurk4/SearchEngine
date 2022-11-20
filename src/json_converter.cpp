@@ -9,7 +9,7 @@ ConverterJSON::ConverterJSON()
     std::stringstream tempStream;
     std::string str;
 
-    std::ifstream file("../config.json"); // добавить проверку наличия/открытия файла !!! //---доделать
+    std::ifstream file("config.json"); // добавить проверку наличия/открытия файла !!! //---доделать
     if(!file.is_open())
     {
         throw ConverterExceptions("config file is missing.\n");
@@ -41,7 +41,7 @@ ConverterJSON::ConverterJSON()
     tempJson.clear();
 
     // запросы из requests.json
-    file.open("../requests.json");
+    file.open("requests.json");
     if(!file.is_open())
     {
         throw ConverterExceptions("Could't open the request.json file!");
@@ -155,7 +155,7 @@ void ConverterJSON::putAnswers(std::vector<std::vector<std::pair<int, float>>> a
         }
     }
 
-    std::ofstream file("../result.json");
+    std::ofstream file("result.json");
     if(!file.is_open())
     {
         throw ConverterExceptions("Could't create result.json file");
@@ -193,7 +193,7 @@ void createConfig (const json &in)
 {
     std::cout << "Create config" << std::endl;
 
-    std::ofstream file ("../config.json");
+    std::ofstream file ("config.json");
 
     if(!file.is_open())
     {
@@ -209,7 +209,7 @@ void createRequests (const json &in)
 {
     std::cout << "Created requests" << std::endl;
 
-    std::ofstream file ("../requests.json");
+    std::ofstream file ("requests.json");
 
     if(!file.is_open())
     {
