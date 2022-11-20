@@ -10,27 +10,68 @@
 ---
 
 ### contents:
-* [Пункт 1](#a1) 
-* [Пункт 1](#a1)
+
+* [About](#home) 
+* [Technology stack](#tech) 
+* [How to use](#use)
+  * [Download](#dl)
+  * [Console compilation](#console)
+  * [IDE compilation](#ide)
 
 ---
 <h3 align="center">technology stack</h3>
+<a id="tech"></a>
 
 [![](/img/cmake.png)](https://cmake.org/ "CMake")
 [![](/img/cpp_stl.png)](https://en.wikipedia.org/wiki/Standard_Template_Library "C++ Standart Template Library")
 [![](/img/nloJson.png)](https://json.nlohmann.me/ "Nlohmann JSON")
 [![](/img/gtest.png)](https://json.nlohmann.me/ "Nlohmann JSON")
+[![](/img/mingw.png)](https://en.wikipedia.org/wiki/MinGW "MinGW")
+---
+<h3 align="center">How to use</h3>
+<a id="use"></a>
 
+
+<a id="dl"></a>
+<details>
+  <summary>Download</summary>
+        
+        Clone the project or download the zip.
+  </details>
+  
+  <a id="console"></a>
+<details>
+<summary>Windows console compilation</summary>
+<ul>
+<li>Go to the project folder:</li>
+
+    >cd ..\SearchEngine
+    
+<li>create a build directory:</li>
+
+    >mkdir build
+      
+<li>Then go to the build directory and run CMake:</li>
+
+    >cd build
+    >cmake ..
+    
+<li>Then compile the project:</li>
+
+    >cmake build ..
+
+</ul>       
+
+  </details>
+  
+  <a id="ide"></a>
+<details>
+  <summary>IDE compilation</summary>
+        
+
+  </details>
 
 ---
-
-Стек используемых технологий:
-C++
-STL
-JSON for Modern C++
-GoogleTest
-CMake
-
 
 
 [Home](#home)
