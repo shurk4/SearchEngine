@@ -11,19 +11,11 @@ InvertedIndex::InvertedIndex(InvertedIndex &other)
 // подсчёт слов в документе и добавление результата в freq_dictionary
 void InvertedIndex::WordsCount()
 {
-    consoleLock.lock();
-//    std::cout << "Task started in thread: " << std::this_thread::get_id() << "\n";
-    consoleLock.unlock();
-
     while(true)
     {
-//        std::cout << "Started WHILE in thread: " << std::this_thread::get_id() << "\n";
         docsLock.lock();
         if(docsIter >= docs.size())
         {
-            consoleLock.lock();
-//            std::cout << "Vec iter < 0!\n";
-            consoleLock.unlock();
             docsLock.unlock();
             break;
         }

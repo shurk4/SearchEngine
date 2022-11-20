@@ -32,7 +32,6 @@ class InvertedIndex
 
     std::mutex docsLock;
     std::mutex freq_dictionaryLock;
-    std::mutex consoleLock;
     int docsIter = 0;
 
     // подсчёт слов в документе

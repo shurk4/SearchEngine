@@ -42,6 +42,8 @@ public:
 
     ~ConverterJSON();
 
+    std::string GetVersion();
+
 /**
 * Метод получения содержимого файлов
 * @return Возвращает список с содержимым файлов перечисленных
@@ -76,7 +78,12 @@ public:
 //--------------------------------------------------------------------------------------------
 
 // функция создаёт файл конфигурации config.json
-void createConfig ();
+void createConfig (const json &in);
 
 // функция создаёт файл запросов request.json
-void createRequests ();
+void createRequests (const json &in);
+
+// функция создаёт тестовые файлы
+std::vector<std::string> createFiles(const std::vector<std::string> &in);
+void createTest1();
+void createTest2();
