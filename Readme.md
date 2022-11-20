@@ -1,29 +1,19 @@
-<a id="anchor2"></a>
+<a id="home"></a>
 <h1 align="center"> Search Engine </h1>
 
-[![Ссылка на проект](logo.png)](https://github.com/shurk4/SearchEngine, "Search Engine")
+[![Ссылка на проект](intro.png)](https://github.com/shurk4/SearchEngine "Search Engine")
 
-~~~ C++
- std::cout << "------=======        Welcome to Search Engine        =======------\n";
- std::cout << "Commands:\n"
-              "C - For automatic creation of test configuration and request files\n"
-              "S - To start engine\n"
-              "Q - To quit\n"
-              "------======================================================------\n";
-~~~
+<h4 align="center"> The "Search Engine" is the final project of the course "Developer in C++ from scratch" on the training platform <a href="https://go.skillbox.ru/"> "SkillBox"</a>. </n4>
 
-<table>
-<tr>
-    <td>
-    123
-    </td>
-    <td>Value 1</td>
-</tr>
-<tr>
-    <td>Key 2</td>
-    <td>Value 2</td>
-</tr>
-</table>
+---
+
+### contents:
+* [Пункт 1](#a1) 
+* [Пункт 1](#a1)
+
+
+
+[Home](#home)
 
 # Заголовок 1
 ## Заголовок 2
