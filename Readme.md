@@ -3,7 +3,7 @@
 
 [![—сылка на проект](intro.png)](https://github.com/shurk4/SearchEngine "Search Engine")
 
-<h4 align="center"> The "Search Engine" is the final project of the course "Developer in C++ from scratch" on the training platform <a href="https://go.skillbox.ru/"> "SkillBox"</a>. </n4>
+<h5 align="center"> The "Search Engine" is the final project of the course "Developer in C++ from scratch" on the training platform <a href="https://go.skillbox.ru/"> "SkillBox"</a>. </h5>
 
 ---
 
