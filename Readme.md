@@ -108,6 +108,7 @@ For the "search engine" to work in the directory with the executable file of the
  You can also create test files automatically using the program menu.
  
      C - For automatic creation of test configuration and request files
+         There are 2 variants of test files
      S - To start engine
      Q - To quit
  
