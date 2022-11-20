@@ -17,6 +17,7 @@
   * [Download](#dl)
   * [Console compilation](#console)
   * [IDE compilation](#ide)
+* [Using the program](#prgm)
 
 ---
 <h3 align="center">technology stack</h3>
@@ -25,8 +26,9 @@
 [![](/img/cmake.png)](https://cmake.org/ "CMake")
 [![](/img/cpp_stl.png)](https://en.wikipedia.org/wiki/Standard_Template_Library "C++ Standart Template Library")
 [![](/img/nloJson.png)](https://json.nlohmann.me/ "Nlohmann JSON")
-[![](/img/gtest.png)](https://json.nlohmann.me/ "Nlohmann JSON")
+[![](/img/gtest.png)](https://json.nlohmann.me/ "Google test")
 [![](/img/mingw.png)](https://en.wikipedia.org/wiki/MinGW "MinGW")
+
 ---
 <h3 align="center">How to use</h3>
 <a id="use"></a>
@@ -58,7 +60,7 @@
     
 <li>Then compile the project:</li>
 
-    >cmake build ..
+    >cmake --build .
 
 </ul>       
 
@@ -66,12 +68,53 @@
   
   <a id="ide"></a>
 <details>
-  <summary>IDE compilation</summary>
-        
+ <summary>IDE compilation</summary>
+ This project has been tested on Clion 2021 and Visual Studio 2022 with MinGW and MSVC compilers.
+ To compile, just open CMakeList.txt in the root directory of the project in one of the listed IDEs.        
 
-  </details>
+</details>
+
+<a id="prgm"></a>
+<details>
+ <summary>Using the program</summary>
+ 
+For the "search engine" to work in the directory with the executable file of the program, the following files are required:
+ 
+ config.json - In this file, you must specify the paths to the text files. 
+ 
+     {
+     "config": {
+        "max_responses": 5,
+        "name": "shuriksSearchEngine",
+        "version": "0.1"
+     },
+     "files": [
+        "file001.txt",
+        "file002.txt",
+        "etc..."
+     ]
+     }
+ 
+ request.json - In this file you need to specify the search queries.
+ 
+     {
+     "requests": [
+        "some request 1",
+        "some request 2",
+        "etc..."
+     ]
+     }
+ 
+ You can also create test files automatically using the program menu.
+ 
+     C - For automatic creation of test configuration and request files
+     S - To start engine
+     Q - To quit
+ 
+ The file with the search results (result.json) will be located in the directory with the executable file 
+
+</details>
 
 ---
-
 
 [Home](#home)
