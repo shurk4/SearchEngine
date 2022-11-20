@@ -18,8 +18,8 @@
 
 [![](/img/cmake.png)](https://cmake.org/ "CMake")
 [![](/img/cpp_stl.png)](https://en.wikipedia.org/wiki/Standard_Template_Library "C++ Standart Template Library")
-
 [![](/img/nloJson.png)](https://json.nlohmann.me/ "Nlohmann JSON")
+[![](/img/gtest.png)](https://json.nlohmann.me/ "Nlohmann JSON")
 
 
 ---
