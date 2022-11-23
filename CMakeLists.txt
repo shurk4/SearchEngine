@@ -13,5 +13,4 @@ FetchContent_MakeAvailable(json)
 
 add_subdirectory(src) # добавление поддиректории c main.cpp к проекту
 add_subdirectory(test)
-#add_subdirectory(nlohmann_json)
 
