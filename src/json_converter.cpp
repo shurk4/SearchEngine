@@ -120,7 +120,7 @@ int ConverterJSON::GetResponsesLimit() const
 * Метод получения запросов из файла requests.json
 * @return возвращает список запросов из файла requests.json
 */
-std::vector<std::string> ConverterJSON::GetRequests()
+std::vector<std::string> ConverterJSON::GetRequests() const
 {
     return requests;
 }

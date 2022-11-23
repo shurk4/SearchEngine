@@ -60,7 +60,7 @@ public:
 * Метод получения запросов из файла requests.json
 * @return возвращает список запросов из файла requests.json
 */
-    std::vector<std::string> GetRequests();
+    std::vector<std::string> GetRequests() const;
 
 /**
 * Положить в файл answers.json результаты поисковых запросов
