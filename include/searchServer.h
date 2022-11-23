@@ -26,7 +26,7 @@ InvertedIndex,
 * чтобы SearchServer мог узнать частоту слов встречаемых в
 запросе
 */
-    SearchServer(InvertedIndex& idx);
+    explicit SearchServer(InvertedIndex& idx);
 /**
 * Метод обработки поисковых запросов
 * @param queries_input поисковые запросы взятые из файла

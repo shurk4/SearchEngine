@@ -114,9 +114,9 @@ std::vector<std::vector<RelativeIndex>> SearchServer::search(const std::vector<s
             index.emplace_back();
         }
 
-        for(auto &i : index)
+        for(auto &it : index)
         {
-            i.rank /= maxIndex;
+            it.rank /= maxIndex;
         }
 
         std::sort(index.begin(), index.end());

@@ -16,7 +16,7 @@ class ConverterExceptions : public std::exception
     }
 
 public:
-    ConverterExceptions(const char* text) : ex(text){}
+    explicit ConverterExceptions(const char* text) : ex(text){}
 };
 
 using json = nlohmann::json;

@@ -71,9 +71,9 @@ int main() {
 
                 std::vector<std::vector<RelativeIndex>> relativeIndex = searchServer.search(converter.GetRequests());
 
-                converter.putAnswers(resultToConverter(relativeIndex));
+                ConverterJSON::putAnswers(resultToConverter(relativeIndex));
 
-                std::cout << "Search completed!" << converter.GetVersion() << "\n";
+                std::cout << "Search completed! " << converter.GetName() << "\n";
             }
             catch(std::exception &ex)
             {
