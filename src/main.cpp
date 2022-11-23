@@ -73,7 +73,7 @@ int main() {
 
                 ConverterJSON::putAnswers(resultToConverter(relativeIndex));
 
-                std::cout << "Search completed! " << converter.GetName() << "\n";
+                std::cout << "Search completed! " << converter.GetName() << " " << converter.GetVersion() << "\n";
             }
             catch(std::exception &ex)
             {
