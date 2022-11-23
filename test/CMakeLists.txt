@@ -8,11 +8,6 @@ set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 include(GoogleTest)
 
-add_executable(json_test ../temp/json_converter_test.cpp ${INCLUDE_DIR}/json_converter.h ${SOURCE_DIR}/json_converter.cpp)
-target_link_libraries(json_test PRIVATE gtest_main)
-target_link_libraries(json_test PRIVATE nlohmann_json::nlohmann_json)
-target_include_directories(json_test PUBLIC ${INCLUDE_DIR})
-
 add_executable(invertedindex_test invertedindex_test.cpp ${INCLUDE_DIR}/invertedindex.h ${SOURCE_DIR}/invertedindex.cpp)
 target_link_libraries(invertedindex_test PRIVATE gtest_main)
 target_include_directories(invertedindex_test PUBLIC ${INCLUDE_DIR})

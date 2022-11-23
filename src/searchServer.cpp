@@ -56,9 +56,9 @@ std::vector<std::vector<RelativeIndex>> SearchServer::search(const std::vector<s
 //        freq_dictionary.
         std::multimap<int, std::string> sortedWords;
 
-        for(auto it : uniqueWords)
+        for(auto &j : uniqueWords)
         {
-            sortedWords.emplace(it.second, it.first);
+            sortedWords.emplace(j.second, j.first);
         }
 //        4. По первому, самому редкому слову из списка находит все документы, в которых
 //        встречается слово.
@@ -66,10 +66,10 @@ std::vector<std::vector<RelativeIndex>> SearchServer::search(const std::vector<s
 //        каждому следующему слову.
 //        6. Если в итоге не осталось ни одного документа, то выводит количество
 //        найденных документов, равное 0. В результат ответа записывает false.
-        std::map<size_t, size_t> tempIndex;
+        std::map<size_t, float> tempIndex;
         bool wordFound = false;
 
-        for(auto  it : sortedWords)
+        for(auto  &it : sortedWords)
         {
             std::vector<Entry> wordEntries = _index.GetWordCount(it.second);
 

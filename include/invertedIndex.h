@@ -8,7 +8,7 @@
 #include <mutex>
 
 struct Entry {
-    size_t doc_id, count;
+    size_t doc_id = 0, count = 0;
 // Данный оператор необходим для проведения тестовых сценариев
     bool operator ==(const Entry& other) const {
         return (doc_id == other.doc_id &&
@@ -50,7 +50,7 @@ public:
 поиск*
 @param texts_input содержимое документов
 */
-    void UpdateDocumentBase(std::vector<std::string> const input_docs);
+    void UpdateDocumentBase(std::vector<std::string> input_docs);
 /**
  * * Метод определяет количество вхождений слова word в загруженной базе
 документов

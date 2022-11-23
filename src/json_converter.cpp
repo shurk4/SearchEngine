@@ -12,11 +12,11 @@ ConverterJSON::ConverterJSON()
     std::ifstream file("config.json"); // добавить проверку наличия/открытия файла !!! //---доделать
     if(!file.is_open())
     {
-        throw ConverterExceptions("config file is missing.\n");
+        throw ConverterExceptions("config file is missing.");
     }
     if (!nlohmann::json::accept(file))
     {
-        throw ConverterExceptions("config file have wrong format\n");
+        throw ConverterExceptions("config file have wrong format");
     }
     file.seekg(0, std::ios_base::beg);
 
@@ -34,9 +34,9 @@ ConverterJSON::ConverterJSON()
     version = tempJson["config"]["version"];
     maxResponses = tempJson["config"]["max_responses"];
 
-    for(auto &it : tempJson["files"])
+    for(auto &it2 : tempJson["files"])
     {
-        files.push_back(it);
+        files.push_back(it2);
     }
     tempJson.clear();
 
@@ -46,22 +46,27 @@ ConverterJSON::ConverterJSON()
     {
         throw ConverterExceptions("Could't open the request.json file!");
     }
-    tempJson << file;
+    file >> tempJson;
     file.close();
 
-    for(auto &it : tempJson["requests"])
+    for(auto &i : tempJson["requests"])
     {
-        requests.push_back(it);
+        requests.push_back(i);
     }
 }
 
-ConverterJSON::~ConverterJSON()
+//ConverterJSON::~ConverterJSON()
+//{
+//    files.empty();
+//    requests.empty();
+//}
+
+std::string ConverterJSON::GetName() const
 {
-    files.empty();
-    requests.empty();
+    return name;
 }
 
-std::string ConverterJSON::GetVersion()
+std::string ConverterJSON::GetVersion() const
 {
     return version;
 }
@@ -106,7 +111,7 @@ std::vector<std::string> ConverterJSON::GetTextDocuments()
 * Метод считывает поле max_responses для определения предельного
 * количества ответов на один запрос
 */
-int ConverterJSON::GetResponsesLimit()
+int ConverterJSON::GetResponsesLimit() const
 {
     return maxResponses;
 }
@@ -123,9 +128,8 @@ std::vector<std::string> ConverterJSON::GetRequests()
 /**
 * Положить в файл answers.json результаты поисковых запросов
 */
-void ConverterJSON::putAnswers(std::vector<std::vector<std::pair<int, float>>> answers) //---доделать
+void ConverterJSON::putAnswers(std::vector<std::vector<std::pair<int, float>>> answers)
 {
-    std::stringstream tempStream;
     nlohmann::json js;
 
     js["answers"];
@@ -155,10 +159,10 @@ void ConverterJSON::putAnswers(std::vector<std::vector<std::pair<int, float>>> a
         }
     }
 
-    std::ofstream file("result.json");
+    std::ofstream file("answer.json");
     if(!file.is_open())
     {
-        throw ConverterExceptions("Could't create result.json file");
+        throw ConverterExceptions("Could't create answer.json file");
     }
 
     file << std::setw(4) << js;
@@ -166,28 +170,6 @@ void ConverterJSON::putAnswers(std::vector<std::vector<std::pair<int, float>>> a
 }
 
 //----------------------------------------------------------------------------------------------------------------------
-
-void ConverterJSON::printConfig()
-{
-    std::cout << "\n------------ CONFIG ------------" << std::endl;
-    std::cout << "\nName: " << name << "\nversion: " << version << "\nmaxResponses: " << maxResponses << std::endl;
-    std::cout << "\nFiles: " << std::endl;
-    for(auto &i : files)
-    {
-        std::cout << "\t" << i << std::endl;
-    }
-    std::cout << "------------ CONFIG ------------" << std::endl;
-}
-
-void ConverterJSON::printRequests()
-{
-    std::cout << "\n------------ REQUESTS ------------" << std::endl;
-    for(auto &i : requests)
-    {
-        std::cout << "\t" << i << std::endl;
-    }
-    std::cout << "------------ REQUESTS ------------" << std::endl;
-}
 
 void createConfig (const json &in)
 {

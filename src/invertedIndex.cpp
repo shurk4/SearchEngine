@@ -88,20 +88,26 @@ void InvertedIndex::CollectDictionary()
     }
     else
     {
-        size_t threadsNum = 1;
+        threadsNum = 1;
     }
 
-    std::vector<std::thread> threads;
+    std::vector<std::thread> threads(threadsNum);
 
 //    std::cout << "Started CollectDictionary. Basic thread ID: " << std::this_thread::get_id() << "\n";
 
     for(int i = 0; i < threadsNum; i++)
     {
 //        std::cout << "Starting thread " << i + 1 << "\n";
-        threads.push_back(std::thread([&]()
+
+        threads[i] = std::thread([&]()
                                       {
                                           WordsCount();
-                                      }));
+                                      });
+
+//        threads.push_back(std::thread([&]()
+//                                      {
+//                                          WordsCount();
+//                                      }));
     }
 
     for(int i = 0; i < threadsNum; i++)
@@ -117,7 +123,7 @@ void InvertedIndex::CollectDictionary()
 поиск*
 @param texts_input содержимое документов
 */
-void InvertedIndex::UpdateDocumentBase(std::vector<std::string> const input_docs)
+void InvertedIndex::UpdateDocumentBase(std::vector<std::string> input_docs)
 {
     bool haveChanges = false;
     if(docs.size() != input_docs.size())
@@ -164,12 +170,12 @@ std::vector<Entry> InvertedIndex::GetWordCount(const std::string& word)
 void InvertedIndex::freq_dictionary_print()
 {
     std::cout << "----=== FREQ DICTIONARY:\n";
-    for(auto it : freq_dictionary)
+    for(auto const &it : freq_dictionary)
     {
         std::cout << "Word: " << it.first << "\n";
-        for(int i = 0; i < it.second.size(); i++)
+        for(auto it2 : it.second)
         {
-            std::cout << " doc_id: " << it.second[i].doc_id << " count: " << it.second[i].count << "\n";
+            std::cout << " doc_id: " << it2.doc_id << " count: " << it2.count << "\n";
         }
 
     }

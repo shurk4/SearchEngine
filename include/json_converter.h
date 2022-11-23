@@ -9,17 +9,14 @@
 
 class ConverterExceptions : public std::exception
 {
-    char* ex;
+    const char* ex;
     const char* what() const noexcept override // const - метод не меняет состояние объекта класса, noexcept - метод гарантированно не генерирует исключений
     {
-        return  ex;
+        return ex;
     }
 
 public:
-    ConverterExceptions(char* text)
-    {
-        ex = text;
-    }
+    ConverterExceptions(const char* text) : ex(text){}
 };
 
 using json = nlohmann::json;
@@ -40,9 +37,10 @@ class ConverterJSON {
 public:
     ConverterJSON();
 
-    ~ConverterJSON();
+//    ~ConverterJSON();
 
-    std::string GetVersion();
+    std::string GetName() const;
+    std::string GetVersion() const;
 
 /**
 * Метод получения содержимого файлов
@@ -56,7 +54,7 @@ public:
 * количества ответов на один запрос
 * @return
 */
-    int GetResponsesLimit();
+    int GetResponsesLimit() const;
 
 /**
 * Метод получения запросов из файла requests.json
@@ -67,12 +65,7 @@ public:
 /**
 * Положить в файл answers.json результаты поисковых запросов
 */
-    void putAnswers(std::vector<std::vector<std::pair<int, float>>> answers);
-
-    // вывести в консоль информацию о конфигурации
-
-    void printConfig(); // !!!
-    void printRequests();
+    static void putAnswers(std::vector<std::vector<std::pair<int, float>>> answers);
 };
 
 //--------------------------------------------------------------------------------------------

@@ -6,7 +6,7 @@
 #include "invertedIndex.h"
 #include "searchServer.h"
 
-std::vector<std::vector<std::pair<int, float>>> resultToConverter(const std::vector<std::vector<RelativeIndex>> relativeIndex)
+std::vector<std::vector<std::pair<int, float>>> resultToConverter(const std::vector<std::vector<RelativeIndex>> &relativeIndex)
 {
     std::vector<std::vector<std::pair<int, float>>> result(relativeIndex.size());
     for (int i = 0; i < relativeIndex.size(); i++) {
@@ -74,7 +74,6 @@ int main() {
                 converter.putAnswers(resultToConverter(relativeIndex));
 
                 std::cout << "Search completed!" << converter.GetVersion() << "\n";
-
             }
             catch(std::exception &ex)
             {
