@@ -16,7 +16,7 @@
 * [How to use](#use)
   * [Download](#dl)
   * [Windows console compilation](#winconsole)
-  * [Windows console compilation](#debconsole)
+  * [Debian console compilation](#debconsole)
   * [IDE compilation](#ide)
   * [Using the program](#prgm)
 
