@@ -1,0 +1,13 @@
+{
+    "config": {
+        "max_responses": 5,
+        "name": "shuriksSearchEngine",
+        "version": "0.1"
+    },
+    "files": [
+        "file001.txt",
+        "file002.txt",
+        "file003.txt",
+        "file004.txt"
+    ]
+}
