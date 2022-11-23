@@ -15,9 +15,10 @@
 * [Technology stack](#tech) 
 * [How to use](#use)
   * [Download](#dl)
-  * [Console compilation](#console)
+  * [Windows console compilation](#winconsole)
+  * [Windows console compilation](#debconsole)
   * [IDE compilation](#ide)
-* [Using the program](#prgm)
+  * [Using the program](#prgm)
 
 ---
 <h3 align="center">technology stack</h3>
@@ -41,7 +42,7 @@
         Clone the project or download the zip.
   </details>
   
-  <a id="console"></a>
+  <a id="winconsole"></a>
 <details>
 <summary>Windows console compilation</summary>
 <ul>
@@ -62,7 +63,45 @@
 
     >cmake --build .
 
-</ul>       
+</ul> 
+</details>
+
+<a id="debconsole"></a>
+<details>
+<summary>Debian console compilation</summary>
+<ul>
+
+ <details>
+ <summary>Preparing for compilation</summary>
+ <ul>
+     Before installing CMake:
+     
+    sudo apt update
+    sudo apt upgrade
+    sudo apt install build-essential checkinstall zlib1g-dev libssl-dev
+     
+Then follow the official CMake instructions: https://cmake.org/install/
+ </ul>
+ </details>
+
+<li>Go to the project folder:</li>
+
+    >cd ..\SearchEngine
+    
+<li>create a build directory:</li>
+
+    >mkdir build
+      
+<li>Then go to the build directory and run CMake:</li>
+
+    >cd build
+    >cmake ..
+    
+<li>Then compile the project:</li>
+
+    >cmake --build .
+
+</ul>
 
   </details>
   
