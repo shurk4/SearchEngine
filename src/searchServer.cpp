@@ -84,7 +84,7 @@ std::vector<std::vector<RelativeIndex>> SearchServer::search(const std::vector<s
                 }
                 else
                 {
-                    it2->second += j.count;
+                    it2->second += (float) j.count;
                 }
             }
         }

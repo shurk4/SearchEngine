@@ -33,7 +33,7 @@ int main() {
         {
             while(input != "1" && input != "2")
             {
-                std::cout << "Choise the test 1 or 2: ";
+                std::cout << "Choice the test 1 or 2: ";
                 std::cin >> input;
                 if(input != "1" && input != "2"){
                     std::cout << "Wrong input\n";

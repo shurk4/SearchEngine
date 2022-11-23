@@ -115,7 +115,7 @@ void InvertedIndex::CollectDictionary()
         if(threads[i].joinable()) threads[i].join();
     }
 
-//    std::cout << "!CollectDictionary complited!\n";
+//    std::cout << "!CollectDictionary completed!\n";
 }
 
 /**

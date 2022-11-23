@@ -44,7 +44,7 @@ ConverterJSON::ConverterJSON()
     file.open("requests.json");
     if(!file.is_open())
     {
-        throw ConverterExceptions("Could't open the request.json file!");
+        throw ConverterExceptions("Couldn't open the request.json file!");
     }
     file >> tempJson;
     file.close();
@@ -87,7 +87,7 @@ std::vector<std::string> ConverterJSON::GetTextDocuments()
 
         if(!file.is_open())
         {
-            throw ConverterExceptions("Could't open docement");
+            throw ConverterExceptions("Couldn't open document");
         }
 
         while(!file.eof())
@@ -162,7 +162,7 @@ void ConverterJSON::putAnswers(std::vector<std::vector<std::pair<int, float>>> a
     std::ofstream file("answer.json");
     if(!file.is_open())
     {
-        throw ConverterExceptions("Could't create answer.json file");
+        throw ConverterExceptions("Couldn't create answer.json file");
     }
 
     file << std::setw(4) << js;
@@ -179,7 +179,7 @@ void createConfig (const json &in)
 
     if(!file.is_open())
     {
-        throw ConverterExceptions("Could't create config.json file");
+        throw ConverterExceptions("Couldn't create config.json file");
     }
 
     file << std::setw(4) << in;
@@ -195,7 +195,7 @@ void createRequests (const json &in)
 
     if(!file.is_open())
     {
-        throw ConverterExceptions("Could't create requests.json file");
+        throw ConverterExceptions("Couldn't create requests.json file");
     }
 
     file << std::setw(4) << in;
