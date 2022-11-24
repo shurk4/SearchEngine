@@ -27,7 +27,7 @@
 [![](/img/cmake.png)](https://cmake.org/ "CMake")
 [![](/img/cpp_stl.png)](https://en.wikipedia.org/wiki/Standard_Template_Library "C++ Standart Template Library")
 [![](/img/nloJson.png)](https://json.nlohmann.me/ "Nlohmann JSON")
-[![](/img/gtest.png)](https://json.nlohmann.me/ "Google test")
+[![](/img/gtest.png)](https://google.github.io/googletest/ "Google test")
 [![](/img/mingw.png)](https://en.wikipedia.org/wiki/MinGW "MinGW")
 
 ---
