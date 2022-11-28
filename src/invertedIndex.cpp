@@ -84,38 +84,36 @@ void InvertedIndex::CollectDictionary()
 
     if(std::thread::hardware_concurrency() > 1)
     {
-        threadsNum = std::thread::hardware_concurrency() - 1;
+        if(threadsNum > docs.size())
+        {
+            threadsNum = docs.size();
+        }
+        else
+        {
+            threadsNum = std::thread::hardware_concurrency() - 1;
+        }
     }
     else
     {
         threadsNum = 1;
     }
 
-    std::vector<std::thread> threads(threadsNum);
-
-//    std::cout << "Started CollectDictionary. Basic thread ID: " << std::this_thread::get_id() << "\n";
+    std::vector<std::thread> threads;
+    threads.reserve(threadsNum);
 
     for(int i = 0; i < threadsNum; i++)
     {
-//        std::cout << "Starting thread " << i + 1 << "\n";
 
-        threads[i] = std::thread([&]()
+        threads.emplace_back(std::thread([&]()
                                       {
                                           WordsCount();
-                                      });
-
-//        threads.push_back(std::thread([&]()
-//                                      {
-//                                          WordsCount();
-//                                      }));
+                                      }));
     }
 
     for(int i = 0; i < threadsNum; i++)
     {
         if(threads[i].joinable()) threads[i].join();
     }
-
-//    std::cout << "!CollectDictionary completed!\n";
 }
 
 /**
