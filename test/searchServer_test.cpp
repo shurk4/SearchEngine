@@ -27,16 +27,6 @@ idx.UpdateDocumentBase(docs);
 SearchServer srv(idx);
 std::vector<vector<RelativeIndex>> result = srv.search(request);
 
-std::cout << "Server test std::vector<vector<RelativeIndex>> result: \n";
-for(int i = 0; i < result.size(); i++)
-{
-    for(int j = 0; j < result[i].size(); j++)
-    {
-        std::cout << "id: " << result[i][j].doc_id << "rank: " << result[i][j].rank << "\n";
-    }
-}
-std::cout << std::endl;
-
 ASSERT_EQ(result, expected);
 }
 TEST(TestCaseSearchServer, TestTop5) {
@@ -76,7 +66,6 @@ const std::vector<vector<RelativeIndex>> expected = {
 };
 InvertedIndex idx;
 idx.UpdateDocumentBase(docs);
-idx.freq_dictionary_print();
 SearchServer srv(idx);
 std::vector<vector<RelativeIndex>> result = srv.search(request);
 ASSERT_EQ(result, expected);

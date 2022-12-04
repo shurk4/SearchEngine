@@ -8,10 +8,17 @@ set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 include(GoogleTest)
 
-add_executable(invertedIndex_test invertedIndex_test.cpp ${INCLUDE_DIR}/invertedIndex.h ${SOURCE_DIR}/invertedIndex.cpp)
-target_link_libraries(invertedIndex_test PRIVATE gtest_main)
-target_include_directories(invertedIndex_test PUBLIC ${INCLUDE_DIR})
+set(Tests
+        invertedIndex_test.cpp
+        searchServer_test.cpp
+        )
 
-add_executable(searchServer_test searchServer_test.cpp ${INCLUDE_DIR}/searchServer.h ${SOURCE_DIR}/searchServer.cpp ${INCLUDE_DIR}/invertedIndex.h ${SOURCE_DIR}/invertedIndex.cpp)
-target_link_libraries(searchServer_test PRIVATE gtest_main)
-target_include_directories(searchServer_test PUBLIC ${INCLUDE_DIR})
+set(Source
+        ${SOURCE_DIR}/invertedIndex.cpp
+        ${SOURCE_DIR}/searchServer.cpp
+        )
+
+add_executable(GTestTests ${Tests} ${Source})
+
+target_link_libraries(GTestTests PRIVATE gtest_main)
+target_include_directories(GTestTests PUBLIC ${INCLUDE_DIR})
