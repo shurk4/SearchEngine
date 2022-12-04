@@ -24,20 +24,18 @@ public:
 * @param idx в конструктор класса передаётся ссылка на класс
 InvertedIndex,
 * чтобы SearchServer мог узнать частоту слов встречаемых в
-запросе
-*/
+запросе */
     explicit SearchServer(InvertedIndex& idx);
+
 /**
 * Метод обработки поисковых запросов
 * @param queries_input поисковые запросы взятые из файла
 requests.json
 * @return возвращает отсортированный список релевантных ответов для
-заданных запросов
-*/
+заданных запросов */
     std::vector<std::vector<RelativeIndex>> search(const std::vector<std::string>& queries_input);
 
-
-    void setMaxResponse(const int &response);
+    void setMaxResponse(const int response);
 private:
     InvertedIndex _index;
     int maxResponse = 5;

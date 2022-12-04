@@ -20,7 +20,6 @@ public:
 };
 
 using json = nlohmann::json;
-//--------------------------------------------------------------------------------------------
 
 /**
 * Класс для работы с JSON-файлами
@@ -37,8 +36,6 @@ class ConverterJSON {
 public:
     ConverterJSON();
 
-//    ~ConverterJSON();
-
     std::string GetName() const;
     std::string GetVersion() const;
 
@@ -47,7 +44,7 @@ public:
 * @return Возвращает список с содержимым файлов перечисленных
 * в config.json
 */
-    std::vector<std::string> GetTextDocuments();
+    std::vector<std::string> GetTextDocuments() const;
 
 /**
 * Метод считывает поле max_responses для определения предельного
@@ -67,8 +64,6 @@ public:
 */
     static void putAnswers(std::vector<std::vector<std::pair<int, float>>> answers);
 };
-
-//--------------------------------------------------------------------------------------------
 
 // функция создаёт файл конфигурации config.json
 void createConfig (const json &in);

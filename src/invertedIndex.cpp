@@ -1,5 +1,4 @@
 #include "invertedIndex.h"
-#include <iostream>
 
 // Конструктор для SearchServer
 InvertedIndex::InvertedIndex(InvertedIndex &other)
@@ -48,7 +47,6 @@ void InvertedIndex::WordsCount()
             }
         }
 
-
         freq_dictionaryLock.lock();
 
         if(freq_dictionary.empty())
@@ -72,7 +70,6 @@ void InvertedIndex::WordsCount()
         }
         freq_dictionaryLock.unlock();
     }
-//    std::cout << "Freq_dictionary size: " << freq_dictionary.size() << "\n";
 }
 
 //Составление словаря
@@ -80,22 +77,15 @@ void InvertedIndex::CollectDictionary()
 {
     freq_dictionary.clear();
     docsIter = 0;
-    size_t threadsNum;
+    size_t threadsNum = std::thread::hardware_concurrency();
 
-    if(std::thread::hardware_concurrency() > 1)
+    if(threadsNum > 1 && threadsNum > docs.size())
     {
-        if(threadsNum > docs.size())
-        {
-            threadsNum = docs.size();
-        }
-        else
-        {
-            threadsNum = std::thread::hardware_concurrency() - 1;
-        }
+        threadsNum = docs.size();
     }
     else
     {
-        threadsNum = 1;
+        threadsNum = 1; // Может std::thread::hardware_concurrency() вернуть значение меньше единицы?
     }
 
     std::vector<std::thread> threads;
@@ -138,20 +128,20 @@ void InvertedIndex::UpdateDocumentBase(std::vector<std::string> input_docs)
             haveChanges = true;
         }
     }
-    //составление freq_dictionary перенесено в temp и в words count (С изменениями)
 
     if(haveChanges)
     {
         CollectDictionary();
     }
 }
+
 /**
  * * Метод определяет количество вхождений слова word в загруженной базе
 документов
 * @param word слово, частоту вхождений которого необходимо определить
 * @return возвращает подготовленный список с частотой слов
 */
-std::vector<Entry> InvertedIndex::GetWordCount(const std::string& word)
+std::vector<Entry> InvertedIndex::GetWordCount(const std::string& word) const
 {
     auto it = freq_dictionary.find(word);
     if(it != freq_dictionary.end())
@@ -165,7 +155,7 @@ std::vector<Entry> InvertedIndex::GetWordCount(const std::string& word)
     }
 }
 
-void InvertedIndex::freq_dictionary_print()
+void InvertedIndex::freq_dictionary_print() const
 {
     std::cout << "----=== FREQ DICTIONARY:\n";
     for(auto const &it : freq_dictionary)
@@ -175,6 +165,5 @@ void InvertedIndex::freq_dictionary_print()
         {
             std::cout << " doc_id: " << it2.doc_id << " count: " << it2.count << "\n";
         }
-
     }
 }

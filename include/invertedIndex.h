@@ -6,6 +6,7 @@
 #include <map>
 #include <thread>
 #include <mutex>
+#include <iostream>
 
 struct Entry {
     size_t doc_id = 0, count = 0;
@@ -21,7 +22,7 @@ class InvertedIndex
 {
     std::vector<std::string> docs; // список содержимого документов (коллекция для хранения текстов документов, в которой номер элемента в векторе определяет doc_id для формирования результата запроса;)
 
-    std::map<std::string, std::vector<Entry>> freq_dictionary; // частотный словарь (коллекция для хранения частоты слов, встречаемых в тексте. Entry представляет собой структуру:)
+    std::map<std::string, std::vector<Entry>> freq_dictionary; // Частотный словарь (коллекция для хранения частоты слов, встречаемых в тексте. Entry представляет собой структуру:)
     /*В коллекции freq_dictionary ключом служат слова из загруженных текстов, а значением
     — вектор из полей doc_id и count. Size_t — тип, используемый при задании размеров и
             индексации коллекций, обычно — это беззнаковый int, но правильнее писать именно
@@ -45,19 +46,19 @@ public:
 
     // Конструктор для SearchServer
     InvertedIndex(InvertedIndex &other);
+
 /**
 * Обновить или заполнить базу документов, по которой будем совершать
 поиск*
-@param texts_input содержимое документов
-*/
+@param texts_input содержимое документов */
     void UpdateDocumentBase(std::vector<std::string> input_docs);
+
 /**
  * * Метод определяет количество вхождений слова word в загруженной базе
 документов
 * @param word слово, частоту вхождений которого необходимо определить
-* @return возвращает подготовленный список с частотой слов
-*/
-    std::vector<Entry> GetWordCount(const std::string& word);
+* @return возвращает подготовленный список с частотой слов */
+    std::vector<Entry> GetWordCount(const std::string& word) const;
 
-    void freq_dictionary_print();
+    void freq_dictionary_print() const;
 };

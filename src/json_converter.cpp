@@ -9,7 +9,7 @@ ConverterJSON::ConverterJSON()
     std::stringstream tempStream;
     std::string str;
 
-    std::ifstream file("config.json"); // добавить проверку наличия/открытия файла !!! //---доделать
+    std::ifstream file("config.json");
     if(!file.is_open())
     {
         throw ConverterExceptions("config file is missing.");
@@ -55,12 +55,6 @@ ConverterJSON::ConverterJSON()
     }
 }
 
-//ConverterJSON::~ConverterJSON()
-//{
-//    files.empty();
-//    requests.empty();
-//}
-
 std::string ConverterJSON::GetName() const
 {
     return name;
@@ -76,7 +70,7 @@ std::string ConverterJSON::GetVersion() const
 * @return Возвращает список с содержимым файлов перечисленных
 * в config.json
 */
-std::vector<std::string> ConverterJSON::GetTextDocuments()
+std::vector<std::string> ConverterJSON::GetTextDocuments() const
 {
     std::vector<std::string> result;
 
@@ -169,8 +163,6 @@ void ConverterJSON::putAnswers(std::vector<std::vector<std::pair<int, float>>> a
     file.close();
 }
 
-//----------------------------------------------------------------------------------------------------------------------
-
 void createConfig (const json &in)
 {
     std::cout << "Create config" << std::endl;
@@ -238,7 +230,6 @@ void createTest1()
 
     createRequests(tempRequests);
 
-
     json tempConfig = {
             {"config" ,{
                                {"name", "shuriksSearchEngine"},
@@ -299,7 +290,6 @@ void createTest2()
 
     createRequests(tempRequests);
 
-
     json tempConfig = {
             {"config" ,{
                                {"name", "shuriksSearchEngine"},
@@ -313,6 +303,7 @@ void createTest2()
 
     json tempJson;
     std::stringstream temp;
+
     for(auto i : tempFiles)
     {
         tempConfig["files"].push_back(i);

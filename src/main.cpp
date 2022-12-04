@@ -1,7 +1,3 @@
-#include <iostream>
-#include <thread>
-#include <vector>
-
 #include "json_converter.h"
 #include "invertedIndex.h"
 #include "searchServer.h"

@@ -1,7 +1,6 @@
-#include <iomanip>
 #include "searchServer.h"
 
-bool symbol(const char &ch)
+bool symbol(const char ch)
 {
     return (ch < 65 || ch > 90 && ch < 97 || ch > 122);
 }
@@ -131,8 +130,7 @@ std::vector<std::vector<RelativeIndex>> SearchServer::search(const std::vector<s
     return result;
 }
 
-void SearchServer::setMaxResponse(const int &response)
+void SearchServer::setMaxResponse(const int response)
 {
     maxResponse = response;
 }
-
