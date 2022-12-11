@@ -4,6 +4,7 @@
 #include <sstream>
 #include <iostream>
 #include <algorithm>
+#include <cctype>
 #include "invertedIndex.h"
 
 struct RelativeIndex{
@@ -35,7 +36,7 @@ requests.json
 заданных запросов */
     std::vector<std::vector<RelativeIndex>> search(const std::vector<std::string>& queries_input);
 
-    void setMaxResponse(const int response);
+    void setMaxResponse(int response);
 private:
     InvertedIndex _index;
     int maxResponse = 5;

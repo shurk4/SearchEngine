@@ -7,7 +7,65 @@ InvertedIndex::InvertedIndex(InvertedIndex &other)
     freq_dictionary = other.freq_dictionary;
 }
 
-// подсчёт слов в документе и добавление результата в freq_dictionary
+// Подсчёт повторяющихся слов в документе
+std::map<std::string, std::vector<Entry>> InvertedIndex::WordsEntry(int iter)
+{
+    std::stringstream tempStream(docs[iter]);
+
+    std::string word;
+    std::map<std::string, std::vector<Entry>> result;
+
+    while(tempStream >> word)
+    {
+        auto it = result.find(word);
+        Entry entry;
+
+        if(result.empty() || it == result.end())
+        {
+            entry.doc_id = iter;
+            entry.count = 1;
+
+            std::vector<Entry> temp;
+            temp.push_back(entry);
+
+            result.emplace(word, temp);
+        }
+        else
+        {
+            it->second[0].count++;
+        }
+    }
+    return result;
+}
+
+// Дополнение частотного словаря
+void InvertedIndex::FreqDictionaryAppend(std::map<std::string, std::vector<Entry>> in)
+{
+    freq_dictionaryLock.lock();
+
+    if(freq_dictionary.empty())
+    {
+        freq_dictionary.insert(in.begin(), in.end());
+    }
+    else
+    {
+        for(auto it : in)
+        {
+            auto it2 = freq_dictionary.find(it.first);
+            if(it2 == freq_dictionary.end())
+            {
+                freq_dictionary.emplace(it.first, it.second);
+            }
+            else
+            {
+                it2->second.push_back(it.second[0]);
+            }
+        }
+    }
+    freq_dictionaryLock.unlock();
+}
+
+// подсчёт слов в документах и добавление результата в freq_dictionary
 void InvertedIndex::WordsCount()
 {
     while(true)
@@ -18,57 +76,11 @@ void InvertedIndex::WordsCount()
             docsLock.unlock();
             break;
         }
-        std::stringstream tempStream(docs[docsIter]);
         int currentDocIter = docsIter;
         docsIter++;
         docsLock.unlock();
 
-        std::string word;
-        std::map<std::string, std::vector<Entry>> dictionary;
-
-        while(tempStream >> word)
-        {
-            auto it = dictionary.find(word);
-            Entry entry;
-
-            if(dictionary.empty() || it == dictionary.end())
-            {
-                entry.doc_id = currentDocIter;
-                entry.count = 1;
-
-                std::vector<Entry> temp;
-                temp.push_back(entry);
-
-                dictionary.emplace(word, temp);
-            }
-            else
-            {
-                    it->second[0].count++;
-            }
-        }
-
-        freq_dictionaryLock.lock();
-
-        if(freq_dictionary.empty())
-        {
-            freq_dictionary.insert(dictionary.begin(), dictionary.end());
-        }
-        else
-        {
-            for(auto it : dictionary)
-            {
-                auto it2 = freq_dictionary.find(it.first);
-                if(it2 == freq_dictionary.end())
-                {
-                    freq_dictionary.emplace(it.first, it.second);
-                }
-                else
-                {
-                    it2->second.push_back(it.second[0]);
-                }
-            }
-        }
-        freq_dictionaryLock.unlock();
+        FreqDictionaryAppend(WordsEntry(currentDocIter));
     }
 }
 
@@ -85,7 +97,7 @@ void InvertedIndex::CollectDictionary()
     }
     else
     {
-        threadsNum = 1; // Может std::thread::hardware_concurrency() вернуть значение меньше единицы?
+        threadsNum = 1;
     }
 
     std::vector<std::thread> threads;
@@ -106,11 +118,7 @@ void InvertedIndex::CollectDictionary()
     }
 }
 
-/**
-* Обновить или заполнить базу документов, по которой будем совершать
-поиск*
-@param texts_input содержимое документов
-*/
+    // Обновить или заполнить базу документов, по которой будем совершать поиск
 void InvertedIndex::UpdateDocumentBase(std::vector<std::string> input_docs)
 {
     bool haveChanges = false;
@@ -135,12 +143,7 @@ void InvertedIndex::UpdateDocumentBase(std::vector<std::string> input_docs)
     }
 }
 
-/**
- * * Метод определяет количество вхождений слова word в загруженной базе
-документов
-* @param word слово, частоту вхождений которого необходимо определить
-* @return возвращает подготовленный список с частотой слов
-*/
+    // Метод определяет количество вхождений слова word в загруженной базе документов
 std::vector<Entry> InvertedIndex::GetWordCount(const std::string& word) const
 {
     auto it = freq_dictionary.find(word);
@@ -152,18 +155,5 @@ std::vector<Entry> InvertedIndex::GetWordCount(const std::string& word) const
     {
         std::vector<Entry> empty;
         return empty;
-    }
-}
-
-void InvertedIndex::freq_dictionary_print() const
-{
-    std::cout << "----=== FREQ DICTIONARY:\n";
-    for(auto const &it : freq_dictionary)
-    {
-        std::cout << "Word: " << it.first << "\n";
-        for(auto it2 : it.second)
-        {
-            std::cout << " doc_id: " << it2.doc_id << " count: " << it2.count << "\n";
-        }
     }
 }

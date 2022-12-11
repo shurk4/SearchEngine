@@ -1,10 +1,11 @@
 cmake_minimum_required(VERSION 3.21)
 
 add_executable(SearchEngine
-        ${SOURCE_DIR}/main.cpp
-        ${SOURCE_DIR}/json_converter.cpp
-        ${SOURCE_DIR}/invertedIndex.cpp
-        ${SOURCE_DIR}/searchServer.cpp)
+        main.cpp
+        json_converter.cpp
+        invertedIndex.cpp
+        searchServer.cpp
+        testFiles.cpp)
 
 target_include_directories(SearchEngine PUBLIC ${INCLUDE_DIR})
 

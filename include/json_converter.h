@@ -10,7 +10,7 @@
 class ConverterExceptions : public std::exception
 {
     const char* ex;
-    const char* what() const noexcept override // const - метод не меняет состояние объекта класса, noexcept - метод гарантированно не генерирует исключений
+    const char* what() const noexcept override
     {
         return ex;
     }
@@ -21,15 +21,13 @@ public:
 
 using json = nlohmann::json;
 
-/**
-* Класс для работы с JSON-файлами
-*/
 class ConverterJSON {
     // параметры из config.json
     std::string name;
     std::string version;
     int maxResponses = 5;
     std::vector<std::string> files;
+
     // запросы из requests.json
     std::vector<std::string> requests;
 
@@ -64,14 +62,3 @@ public:
 */
     static void putAnswers(std::vector<std::vector<std::pair<int, float>>> answers);
 };
-
-// функция создаёт файл конфигурации config.json
-void createConfig (const json &in);
-
-// функция создаёт файл запросов request.json
-void createRequests (const json &in);
-
-// функция создаёт тестовые файлы
-std::vector<std::string> createFiles(const std::vector<std::string> &in);
-void createTest1();
-void createTest2();

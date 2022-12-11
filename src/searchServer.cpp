@@ -1,9 +1,9 @@
 #include "searchServer.h"
 
-bool symbol(const char ch)
-{
-    return (ch < 65 || ch > 90 && ch < 97 || ch > 122);
-}
+//bool symbol(const char ch)
+//{
+//    return (ch < 65 || ch > 90 && ch < 97 || ch > 122);
+//}
 
 /**
 * @param idx в конструктор класса передаётся ссылка на класс
@@ -33,7 +33,7 @@ std::vector<std::vector<RelativeIndex>> SearchServer::search(const std::vector<s
         // 1. Разбивает поисковый запрос на отдельные слова
         while(tempStream >> word)
         {
-            if(symbol(word[word.size() - 1]))
+            if(!std::isalpha(word[word.size() - 1]))
             {
                 word.pop_back();
             }
@@ -130,7 +130,7 @@ std::vector<std::vector<RelativeIndex>> SearchServer::search(const std::vector<s
     return result;
 }
 
-void SearchServer::setMaxResponse(const int response)
+void SearchServer::setMaxResponse(int response)
 {
     maxResponse = response;
 }
