@@ -26,11 +26,10 @@ class TestFiles
     static nlohmann::json requests;
     static std::vector<std::vector<std::string>> docs;
 
+public:
     TestFiles() = delete;
     TestFiles(const TestFiles&) = delete;
     void operator = ( const TestFiles& ) = delete;
-
-public:
 // метод создаёт файл конфигурации config.json
     static void createConfig (int in);
 

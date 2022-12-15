@@ -15,17 +15,17 @@ SearchServer::SearchServer(InvertedIndex& idx) : _index(idx) {}
 
 /**
 * Метод обработки поисковых запросов
-* @param queries_input поисковые запросы взятые из файла
+* @param queriesInput поисковые запросы взятые из файла
 requests.json
 * @return возвращает отсортированный список релевантных ответов для
 заданных запросов
 */
-std::vector<std::vector<RelativeIndex>> SearchServer::search(const std::vector<std::string>& queries_input)
+std::vector<std::vector<RelativeIndex>> SearchServer::search(const std::vector<std::string>& queriesInput)
 {
     std::vector<std::vector<RelativeIndex>> result;
 
     // разделение запроса на слова, поиск по словам, создание релевантного индекса запроса
-    for(auto &i : queries_input)
+    for(auto &i : queriesInput)
     {
         std::stringstream tempStream(i);
         std::string word;
@@ -52,7 +52,7 @@ std::vector<std::vector<RelativeIndex>> SearchServer::search(const std::vector<s
         }
 //        3. Сортирует слова в порядке увеличения частоты встречаемости: от самых
 //        редких до самых частых. По возрастанию значения поля count поля
-//        freq_dictionary.
+//        freqDictionary.
         std::multimap<int, std::string> sortedWords;
 
         for(auto &j : uniqueWords)
@@ -76,10 +76,10 @@ std::vector<std::vector<RelativeIndex>> SearchServer::search(const std::vector<s
 
             for (auto &j : wordEntries)
             {
-                auto it2 = tempIndex.find(j.doc_id);
+                auto it2 = tempIndex.find(j.docId);
                 if(it2 == tempIndex.end())
                 {
-                    tempIndex.emplace(j.doc_id, j.count);
+                    tempIndex.emplace(j.docId, j.count);
                 }
                 else
                 {
@@ -90,7 +90,7 @@ std::vector<std::vector<RelativeIndex>> SearchServer::search(const std::vector<s
 //        7. Если документы найдены, рассчитывает по каждому из них релевантность и
 //        выводит её в поле rank в ответе на запрос. Для этого для каждого документа
 //        рассчитывается абсолютная релевантность — сумма всех count всех найденных
-//        в документе слов из коллекции freq_dictionary, которая делится
+//        в документе слов из коллекции freqDictionary, которая делится
         std::vector<RelativeIndex> index;
         RelativeIndex temp;
         float maxIndex = 0;
@@ -103,7 +103,7 @@ std::vector<std::vector<RelativeIndex>> SearchServer::search(const std::vector<s
                 {
                     maxIndex = it.second;
                 }
-                temp.doc_id = it.first;
+                temp.docId = it.first;
                 temp.rank = it.second;
                 index.push_back(temp);
             }

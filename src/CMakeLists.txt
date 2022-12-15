@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.21)
 
 add_executable(SearchEngine
         main.cpp
-        json_converter.cpp
+        jsonConverter.cpp
         invertedIndex.cpp
         searchServer.cpp
         testFiles.cpp)

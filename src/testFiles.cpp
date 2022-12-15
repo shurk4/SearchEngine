@@ -48,7 +48,7 @@ void TestFiles::createFiles(int in)
 
 nlohmann::json TestFiles::config = {
         {{"config" ,{
-                            {"name", "shuriksSearchEngine"},
+                            {"name", "SearchEngine"},
                             {"version", "0.1"},
                             {"max_responses", 5}
                     }},
@@ -58,7 +58,7 @@ nlohmann::json TestFiles::config = {
                              "file003.txt",
                              "file004.txt"}}},
         {{"config" ,{
-                            {"name", "shuriksSearchEngine"},
+                            {"name", "SearchEngine"},
                             {"version", "0.1"},
                             {"max_responses", 5}
                     }},

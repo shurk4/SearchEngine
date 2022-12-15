@@ -8,14 +8,14 @@
 #include "invertedIndex.h"
 
 struct RelativeIndex{
-    size_t doc_id = 0;
+    size_t docId = 0;
     float rank = 0;
     bool operator == (const RelativeIndex& other) const {
-        return (doc_id == other.doc_id && rank == other.rank);
+        return (docId == other.docId && rank == other.rank);
     }
     bool operator < (const RelativeIndex& other) const
     {
-        return (rank > other.rank || (rank == other.rank && doc_id < other.doc_id));
+        return (rank > other.rank || (rank == other.rank && docId < other.docId));
     }
 };
 
@@ -30,11 +30,11 @@ InvertedIndex,
 
 /**
 * Метод обработки поисковых запросов
-* @param queries_input поисковые запросы взятые из файла
+* @param queriesInput поисковые запросы взятые из файла
 requests.json
 * @return возвращает отсортированный список релевантных ответов для
 заданных запросов */
-    std::vector<std::vector<RelativeIndex>> search(const std::vector<std::string>& queries_input);
+    std::vector<std::vector<RelativeIndex>> search(const std::vector<std::string>& queriesInput);
 
     void setMaxResponse(int response);
 private:

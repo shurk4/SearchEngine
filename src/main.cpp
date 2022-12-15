@@ -1,4 +1,4 @@
-#include "json_converter.h"
+#include "jsonConverter.h"
 #include "invertedIndex.h"
 #include "searchServer.h"
 #include "testFiles.h"
@@ -8,7 +8,7 @@ std::vector<std::vector<std::pair<int, float>>> resultToConverter(const std::vec
     std::vector<std::vector<std::pair<int, float>>> result(relativeIndex.size());
     for (int i = 0; i < relativeIndex.size(); i++) {
         for (int j = 0; j < relativeIndex[i].size(); j++) {
-            result[i].push_back(std::make_pair(relativeIndex[i][j].doc_id, relativeIndex[i][j].rank));
+            result[i].push_back(std::make_pair(relativeIndex[i][j].docId, relativeIndex[i][j].rank));
         }
     }
     return result;
@@ -44,8 +44,6 @@ void startEngine()
     {
         ConverterJSON converter;
 
-        std::cout << "Welcome to Search Engine v. " << converter.GetVersion() << "\n";
-
         std::vector<std::string> documents = converter.GetTextDocuments();
         InvertedIndex index;
 
@@ -58,7 +56,7 @@ void startEngine()
 
         ConverterJSON::putAnswers(resultToConverter(relativeIndex));
 
-        std::cout << "Search completed! " << converter.GetName() << " " << converter.GetVersion() << "\n";
+        std::cout << "Search completed! " << "\n";
     }
     catch(std::exception &ex)
     {
@@ -66,33 +64,51 @@ void startEngine()
     }
 }
 
+char input()
+{
+    std::string str;
+    while(str.size() != 1)
+    {
+        std::cin >> str;
+        if(str.size() != 1)
+        {
+            std::cout << "Wrong input! Try again:\n";
+        }
+    }
+    return (char)std::tolower(str[0]);
+}
+
 void mainMenu()
 {
-    char input = ' ';
-    while((char)std::tolower(input) != 'q')
+    while(true)
     {
         std::cout << "Enter the command: ";
-        std::cin >> input;
-        if(input == 'c' || input == 'C')
+        char in = input();
+        if(in == 'c')
         {
-            while(input != '1' && input != '2')
+            while(in != '1' && in != '2')
             {
                 std::cout << "Choice the test 1 or 2: ";
-                std::cin >> input;
-                if(input != '1' && input != '2'){
-                    std::cout << "Wrong input\n";
+                in = input();
+                if(in != '1' && in != '2'){
+                    std::cout << "Wrong input! Try again:\n";
                 }
             }
-            createTestFiles((input - '0') - 1);
+            createTestFiles((in - '0') - 1);
             std::cout << "\n";
         }
-        else if((char)std::tolower(input) == 'q')
-        {
-            std::cout << "Bye!\n";
-        }
-        else if((char)std::tolower(input) == 's')
+        else if(in == 's')
         {
             startEngine();
+        }
+        else if(in == 'q')
+        {
+            std::cout << "Bye!\n";
+            break;
+        }
+        else
+        {
+            std::cout << "Wrong input! Try again:\n";
         }
     }
 }
