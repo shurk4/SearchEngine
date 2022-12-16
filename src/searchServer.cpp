@@ -1,10 +1,5 @@
 #include "searchServer.h"
 
-//bool symbol(const char ch)
-//{
-//    return (ch < 65 || ch > 90 && ch < 97 || ch > 122);
-//}
-
 /**
 * @param idx в конструктор класса передаётся ссылка на класс
 InvertedIndex,
